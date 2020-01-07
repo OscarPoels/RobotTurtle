@@ -1,5 +1,7 @@
 package Jeu;
 
+import Tuiles.Tuile;
+
 import java.util.HashMap;
 import java.util.Map;
 

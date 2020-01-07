@@ -52,7 +52,18 @@ public class GrillePanel extends JPanel {
 }
 
 class Case extends JPanel {
+    protected int x;
+    protected int y;
+    protected String Tuile;
+    protected String couleur;
+    protected boolean isCasePleine;
+
     Case() {
+        this.x = x;
+        this.y = y;
+    }
+
+    public void paintComponent(Graphics g) {
 
     }
 }
