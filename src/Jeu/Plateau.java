@@ -2,10 +2,10 @@ package Jeu;
 
 import Graphisme.Case;
 import Graphisme.Fenetre;
-import Tuiles.Joyau;
-import Tuiles.Mur;
-import Tuiles.Tortue;
-import Tuiles.Tuile;
+import Jeu.Tuiles.Joyau;
+import Jeu.Tuiles.Mur;
+import Jeu.Tuiles.Tortue;
+import Jeu.Tuiles.Tuile;
 
 public class Plateau {
     public Case[][] ListeCase = new Case[8][8];

@@ -1,6 +1,6 @@
 package Graphisme;
 
-import Tuiles.Tuile;
+import Jeu.Tuiles.Tuile;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class Case extends JPanel {
                 AffineTransform rotation = new AffineTransform();
                 Graphics2D g2d = (Graphics2D) g;
 
-                imgTuile = ImageIO.read(new File("images\\Tuiles\\" + type.toLowerCase() + "_" + couleur + ".png"));
+                imgTuile = ImageIO.read(new File("images\\Tuiles\\" + type.toLowerCase() + "_" + couleur.toLowerCase() + ".png"));
                 rotation.rotate(Math.toRadians(90), (int) (imgTuile.getWidth(this) / 2), (int) (imgTuile.getHeight(this) / 2));
                 //double xH = this.getHeight();
                 //double yH = imgTuile.getHeight(this);
@@ -42,7 +42,7 @@ public class Case extends JPanel {
                 //g2d.drawImage(imgTuile,rotation, this);
                 g.drawImage(imgTuile, 0, 0, this.getWidth(), this.getHeight(), this);
             } catch (IOException e) {
-                System.out.println("Impossible de charger l'image :" + "\n" + "images\\Tuiles\\" + type.toLowerCase() + "_" + couleur + ".png");
+                System.out.println("Impossible de charger l'image :" + "\n" + "images\\Tuiles\\" + type.toLowerCase() + "_" + couleur.toLowerCase() + ".png");
             }
 
         } else {

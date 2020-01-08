@@ -1,15 +1,20 @@
-package Tuiles;
+package Jeu.Tuiles;
 
 public class Tortue extends Tuile {
     //*************   VARIABLES  *************
-    private String couleur;
     private String direction;
-    public String type;
 
     //*************   CONSTRUCTEUR  *************
 
     public Tortue(int x, int y, String couleur, String direction) {
         super(x, y, "TORTUE", couleur);
+        this.direction = direction;
+
+    }
+
+
+    public String getDirection() {
+        return this.direction;
     }
 
 }

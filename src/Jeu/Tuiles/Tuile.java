@@ -1,4 +1,4 @@
-package Tuiles;
+package Jeu.Tuiles;
 
 public class Tuile {
 
