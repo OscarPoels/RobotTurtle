@@ -3,23 +3,26 @@ package Graphisme;
 
 import Jeu.Plateau;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 
-public class Fenetre extends JFrame {
+public class FenetreMenu extends JFrame {
     private final Dimension TAILLE_BOUTON = new Dimension(150, 40);
-    private Fenetre fenetre;
+    private FenetreMenu fenetreMenu;
     private FenetreJeu FeJeu;
     private Plateau plateau;
     private JButton Bouton2J = new JButton("2 Joueurs");
     private JButton Bouton3J = new JButton("3 Joueurs");
     private JButton Bouton4J = new JButton("4 Joueurs");
 
-    public Fenetre() {
-        fenetre = this;
+    public FenetreMenu() {
+        fenetreMenu = this;
         Background Back = new Background();
         //Parametre de base
         this.setTitle("Turtle Game");
@@ -82,5 +85,17 @@ public class Fenetre extends JFrame {
         return plateau;
     }
 
+    public class Background extends JPanel {
+        public void paintComponent(Graphics g) {
+            try {
+                Image img = ImageIO.read(new File("images\\background.jpeg"));
+                //g.drawImage(img, 0, 0, this);
+                //Pour une image de fond
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }

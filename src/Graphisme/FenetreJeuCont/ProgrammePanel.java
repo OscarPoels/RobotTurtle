@@ -1,9 +1,9 @@
-package Graphisme;
+package Graphisme.FenetreJeuCont;
 
 import javax.swing.*;
 
 public class ProgrammePanel extends JPanel {
-    ProgrammePanel() {
+    public ProgrammePanel() {
         this.setLayout(null);
         this.setOpaque(false);
 

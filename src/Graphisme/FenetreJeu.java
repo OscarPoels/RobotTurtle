@@ -1,10 +1,14 @@
 package Graphisme;
 
 
+import Graphisme.FenetreJeuCont.*;
 import Jeu.Plateau;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class FenetreJeu extends JFrame {
     private static final Dimension TAILLE_CHOIXPANEL = new Dimension(220, 0);
@@ -12,16 +16,18 @@ public class FenetreJeu extends JFrame {
     private static final Dimension TAILLE_GRILLE = new Dimension(560, 560);
     private static final Dimension CARTES_PANEL_TAILLE = new Dimension(1000, 200);
     public Plateau plateau;
-    private GrillePanel grillePanel;
 
     public FenetreJeu(Plateau plateau) {
+        this.plateau = plateau;
+
         JPanel Conteneur = new JPanel();
         BackgroundJeu Background = new BackgroundJeu();
-        CartesPanel cartesPanel = new CartesPanel();
+        CartesPanel cartesPanel = new CartesPanel(plateau.getTourJoueur());
         ProgrammePanel programmePanel = new ProgrammePanel();
         ChoixPanel choixPanel = new ChoixPanel();
-        this.plateau = plateau;
-        grillePanel = new GrillePanel(this);
+        GrillePanel grillePanel = new GrillePanel(this);
+
+
         choixPanel.setPreferredSize(TAILLE_CHOIXPANEL);
         //choixPanel.setBackground(Color.BLACK);
         programmePanel.setPreferredSize(TAILLE_PROGRAMME);
@@ -52,4 +58,17 @@ public class FenetreJeu extends JFrame {
     public Plateau getPlateau() {
         return this.plateau;
     }
+
+    public class BackgroundJeu extends JPanel {
+        public void paintComponent(Graphics g) {
+            try {
+                Image img = ImageIO.read(new File("images\\Background.jpg"));
+                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 }

@@ -1,9 +1,9 @@
 package Jeu;
 
-import Graphisme.Fenetre;
+import Graphisme.FenetreMenu;
 
 public class Main {
-    private static Fenetre fenetre;
+    private static FenetreMenu fenetreMenu;
     public static void main(String[] args) {
         /*
         Plateau Plat = new Plateau(4);
@@ -14,8 +14,7 @@ public class Main {
         System.out.println(Jaune.getMain());
          */
 
-        fenetre = new Fenetre();
-        System.out.println(fenetre.getPlateau());
+        fenetreMenu = new FenetreMenu();
 
     }
 

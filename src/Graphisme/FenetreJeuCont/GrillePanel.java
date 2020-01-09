@@ -1,5 +1,7 @@
-package Graphisme;
+package Graphisme.FenetreJeuCont;
 
+
+import Graphisme.FenetreJeu;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

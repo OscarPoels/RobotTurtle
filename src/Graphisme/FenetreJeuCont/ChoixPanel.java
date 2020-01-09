@@ -1,10 +1,10 @@
-package Graphisme;
+package Graphisme.FenetreJeuCont;
 
 import javax.swing.*;
 
 public class ChoixPanel extends JPanel {
 
-    ChoixPanel() {
+    public ChoixPanel() {
         JButton Construire = new JButton("Construire un mur");
         JButton Compléter = new JButton("Compléter le programme");
         JButton Executer = new JButton("Executer le programme");

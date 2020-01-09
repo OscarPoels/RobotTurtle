@@ -1,5 +1,7 @@
 package Jeu;
 
+import Jeu.Cartes.Carte;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -7,8 +9,8 @@ public class Joueur {
     //*************   VARIABLES  *************
 
     private String couleur;
-    private ArrayList<String> Deck = new ArrayList<>();
-    private ArrayList<String> CartesMain = new ArrayList<>();
+    private ArrayList<Carte> Deck = new ArrayList<>();
+    private ArrayList<Carte> CartesMain = new ArrayList<>();
     private ArrayList<String> Programme = new ArrayList<>();
     private int MurGlace;
     private int MurPierre;
@@ -26,16 +28,12 @@ public class Joueur {
         return couleur;
     }
 
-    public ArrayList<String> getDeck() {
+    public ArrayList<Carte> getDeck() {
         return Deck;
     }
 
-    public ArrayList<String> getMain() {
+    public ArrayList<Carte> getCartesMain() {
         return CartesMain;
-    }
-
-    public int getTailleDeck() {
-        return Deck.size();
     }
 
     public int getMurGlace() {
@@ -50,24 +48,21 @@ public class Joueur {
         return Programme;
     }
 
-    public int getTailleProgramme() {
-        return Programme.size();
-    }
 
     //*************   FONCTIONS  *************
 
     private void InitialisationDeck() {
         for (int i = 0; i < 18; i++) {
-            Deck.add("Carte Bleu");
+            Deck.add(new Carte("Bleu"));
         }
 
         for (int i = 0; i < 8; i++) {
-            Deck.add("Carte Jaunes");
-            Deck.add("Carte Violettes");
+            Deck.add(new Carte("Jaune"));
+            Deck.add(new Carte("Violet"));
         }
 
         for (int i = 0; i < 3; i++) {
-            Deck.add("Carte Laser");
+            Deck.add(new Carte("Laser"));
         }
         Collections.shuffle(Deck);
         MurPierre = 3;

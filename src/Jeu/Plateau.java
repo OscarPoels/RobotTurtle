@@ -1,16 +1,13 @@
 package Jeu;
 
-import Graphisme.Case;
-import Graphisme.Fenetre;
+import Graphisme.FenetreJeuCont.Case;
 import Jeu.Tuiles.Joyau;
 import Jeu.Tuiles.Mur;
 import Jeu.Tuiles.Tortue;
 import Jeu.Tuiles.Tuile;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Plateau {
 
@@ -115,6 +112,10 @@ public class Plateau {
 
     public void updateTourJoueur(int Tour){
         TourJoueur = ListeJoueur.get((Tour+1)%3);
+    }
+
+    public Joueur getTourJoueur() {
+        return TourJoueur;
     }
 
 }

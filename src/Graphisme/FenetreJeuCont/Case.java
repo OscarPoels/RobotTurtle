@@ -1,4 +1,4 @@
-package Graphisme;
+package Graphisme.FenetreJeuCont;
 
 import Jeu.Tuiles.Tuile;
 
@@ -10,11 +10,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Case extends JPanel {
-    protected int x;
-    protected int y;
-    protected String type;
-    protected String couleur;
-    protected boolean isPleine;
+    private int x;
+    private int y;
+    private String type;
+    private String couleur;
+    private boolean isPleine;
 
     public Case(int x, int y) {
         this.x = x;
