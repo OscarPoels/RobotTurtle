@@ -7,22 +7,19 @@ public class Joueur {
     //*************   VARIABLES  *************
 
     private String couleur;
-    private ArrayList<String> Deck = new ArrayList<String>();
-    private ArrayList<String> CartesMain = new ArrayList<String>();
-    private ArrayList<String> Programme = new ArrayList<String>();
+    private ArrayList<String> Deck = new ArrayList<>();
+    private ArrayList<String> CartesMain = new ArrayList<>();
+    private ArrayList<String> Programme = new ArrayList<>();
     private int MurGlace;
     private int MurPierre;
 
-
     //*************   CONSTRUCTEUR  *************
-    public Joueur() {
+    public Joueur(String couleur) {
         InitialisationDeck();
         PiocheDepart();
+        this.couleur = couleur;
     }
 
-    public Joueur(String pCouleur) {
-        couleur = pCouleur;
-    }
     //*************   GETEUR  *************
 
     public String getCouleur() {

@@ -11,9 +11,9 @@ import java.awt.event.ActionListener;
 
 public class Fenetre extends JFrame {
     private final Dimension TAILLE_BOUTON = new Dimension(150, 40);
-    public Fenetre fenetre;
-    public FenetreJeu FeJeu;
-    public Plateau plateau;
+    private Fenetre fenetre;
+    private FenetreJeu FeJeu;
+    private Plateau plateau;
     private JButton Bouton2J = new JButton("2 Joueurs");
     private JButton Bouton3J = new JButton("3 Joueurs");
     private JButton Bouton4J = new JButton("4 Joueurs");
@@ -44,7 +44,7 @@ public class Fenetre extends JFrame {
         iniBouton();
     }
 
-    public void iniBouton() {
+    private void iniBouton() {
         Bouton2J.setPreferredSize(TAILLE_BOUTON);
         Bouton3J.setPreferredSize(TAILLE_BOUTON);
         Bouton4J.setPreferredSize(TAILLE_BOUTON);
@@ -76,9 +76,11 @@ public class Fenetre extends JFrame {
                 dispose();
             }
         });
-        ;
     }
 
+    public Plateau getPlateau() {
+        return plateau;
+    }
 
 
 }
