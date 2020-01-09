@@ -59,7 +59,7 @@ public class FenetreJeu extends JFrame {
         return this.plateau;
     }
 
-    public class BackgroundJeu extends JPanel {
+    public static class BackgroundJeu extends JPanel {
         public void paintComponent(Graphics g) {
             try {
                 Image img = ImageIO.read(new File("images\\Background.jpg"));

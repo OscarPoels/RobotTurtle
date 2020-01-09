@@ -2,7 +2,7 @@ package Jeu.Cartes;
 
 public class Jaune extends Carte {
 
-    public Jaune(String type) {
+    public Jaune() {
         super("Jaune");
     }
 

@@ -1,5 +1,6 @@
 package Jeu.Tuiles;
 
+
 public class Mur extends Tuile {
     public String type;
     //*************   VARIABLES  *************

@@ -26,7 +26,6 @@ public class Case extends JPanel {
         if (isPleine) {
             Image imgTuile;
             try {
-
                 AffineTransform rotation = new AffineTransform();
                 Graphics2D g2d = (Graphics2D) g;
 

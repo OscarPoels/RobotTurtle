@@ -104,9 +104,9 @@ public class Plateau {
     public void iniTourJoueur(){
         Collections.shuffle(ListeJoueur);
         TourJoueur =  ListeJoueur.get(0);
-        System.out.println(ListeJoueur.get(0).getCouleur());
+        //System.out.println(ListeJoueur.get(0).getCouleur());
         for (int i = 0 ; i < ListeJoueur.size(); i++) {
-            System.out.println(ListeJoueur.get(i).getCouleur());
+            // System.out.println(ListeJoueur.get(i).getCouleur());
         }
     }
 

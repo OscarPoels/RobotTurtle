@@ -14,7 +14,6 @@ import java.io.IOException;
 
 public class FenetreMenu extends JFrame {
     private final Dimension TAILLE_BOUTON = new Dimension(150, 40);
-    private FenetreMenu fenetreMenu;
     private FenetreJeu FeJeu;
     private Plateau plateau;
     private JButton Bouton2J = new JButton("2 Joueurs");
@@ -22,7 +21,6 @@ public class FenetreMenu extends JFrame {
     private JButton Bouton4J = new JButton("4 Joueurs");
 
     public FenetreMenu() {
-        fenetreMenu = this;
         Background Back = new Background();
         //Parametre de base
         this.setTitle("Turtle Game");
@@ -85,7 +83,7 @@ public class FenetreMenu extends JFrame {
         return plateau;
     }
 
-    public class Background extends JPanel {
+    public static class Background extends JPanel {
         public void paintComponent(Graphics g) {
             try {
                 Image img = ImageIO.read(new File("images\\background.jpeg"));

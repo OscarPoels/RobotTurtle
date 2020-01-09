@@ -1,6 +1,8 @@
 package Jeu;
 
 import Jeu.Cartes.Carte;
+import Jeu.Cartes.CarteMur;
+import Jeu.Tuiles.Mur;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,8 +14,6 @@ public class Joueur {
     private ArrayList<Carte> Deck = new ArrayList<>();
     private ArrayList<Carte> CartesMain = new ArrayList<>();
     private ArrayList<String> Programme = new ArrayList<>();
-    private int MurGlace;
-    private int MurPierre;
 
     //*************   CONSTRUCTEUR  *************
     public Joueur(String couleur) {
@@ -34,14 +34,6 @@ public class Joueur {
 
     public ArrayList<Carte> getCartesMain() {
         return CartesMain;
-    }
-
-    public int getMurGlace() {
-        return MurGlace;
-    }
-
-    public int getMurPierre() {
-        return MurPierre;
     }
 
     public ArrayList<String> getProgramme() {
@@ -65,13 +57,17 @@ public class Joueur {
             Deck.add(new Carte("Laser"));
         }
         Collections.shuffle(Deck);
-        MurPierre = 3;
-        MurGlace = 2;
     }
 
     private void PiocheDepart() {
         for (int i = 0; i < 5; i++) {
             CartesMain.add(Deck.remove(0));
+        }
+        for (int i = 0; i < 3; i++) {
+            CartesMain.add(new CarteMur("PIERRE"));
+        }
+        for (int i = 0; i < 2; i++) {
+            CartesMain.add(new CarteMur("GLACE"));
         }
     }
 
