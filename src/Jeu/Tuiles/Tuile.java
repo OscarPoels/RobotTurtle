@@ -6,6 +6,7 @@ public class Tuile {
     private int y;
     private String type;
     private String couleur;
+    private Tortue tortue;
 
     public Tuile(int x, int y, String type, String couleur) {
         this.x = x;

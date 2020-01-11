@@ -9,9 +9,7 @@ public class Tortue extends Tuile {
     public Tortue(int x, int y, String couleur, String direction) {
         super(x, y, "TORTUE", couleur);
         this.direction = direction;
-
     }
-
 
     public String getDirection() {
         return this.direction;

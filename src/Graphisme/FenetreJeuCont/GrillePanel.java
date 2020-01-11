@@ -31,11 +31,11 @@ public class GrillePanel extends JPanel {
         gl.setHgap(5);
         gl.setVgap(5);
         Cases.setLayout(gl);
-        Case[][] ListeCases = fenetre.getPlateau().getCases();
+        AffichageCase[][] listeAffichageCases = fenetre.getPlateau().getCases();
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                Case caseGrille = ListeCases[i][j];
-                Cases.add(caseGrille);
+                AffichageCase affichageCaseGrille = listeAffichageCases[i][j];
+                Cases.add(affichageCaseGrille);
             }
         }
     }
@@ -54,6 +54,7 @@ public class GrillePanel extends JPanel {
             }
         }
     }
+
 
 }
 

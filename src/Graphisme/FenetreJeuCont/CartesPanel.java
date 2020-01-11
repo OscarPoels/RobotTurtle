@@ -1,95 +1,121 @@
 package Graphisme.FenetreJeuCont;
 
 
+import Graphisme.FenetreJeu;
+import Jeu.Cartes.Carte;
 import Jeu.Joueur;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
 import java.text.AttributedCharacterIterator;
+import java.util.ArrayList;
 
 public class CartesPanel extends JPanel {
     private Joueur joueur;
-    public CartesPanel(Joueur joueur) {
-        this.joueur = joueur;
-        JPanel ConteneurCartes = new JPanel();
-        Texte texte = new Texte();
+    public ArrayList<AffichageCarte> listeAffichageCarte = new ArrayList<>();
+    public FenetreJeu feJeu;
+    private JPanel ConteneurCartes_Tortue = new JPanel();
+    private JPanel ConteneurCartes_Mur = new JPanel();
+
+    public CartesPanel(FenetreJeu feJeu) {
+        this.joueur = feJeu.getPlateau().getTourJoueur();
+        this.feJeu = feJeu;
+
+        JPanel Vide1 = new JPanel();
+        JPanel Vide2 = new JPanel();
+        JPanel Vide3 = new JPanel();
+        JPanel Vide4 = new JPanel();
+
         GridLayout gridCont = new GridLayout();
         GridLayout gridThis = new GridLayout();
 
         gridCont.setColumns(joueur.getCartesMain().size());
         gridCont.setRows(1);
-        gridCont.setHgap(20);
+        gridCont.setHgap(10);
         gridThis.setRows(2);
-        gridThis.setColumns(1);
+        gridThis.setColumns(3);
 
         this.setLayout(gridThis);
-        ConteneurCartes.setLayout(gridCont);
+        ConteneurCartes_Tortue.setLayout(gridCont);
+        ConteneurCartes_Mur.setLayout(gridCont);
+        iniCartePanel();
 
+
+        this.add(Vide1);
+        this.add(Vide2);
+        this.add(Vide3);
+        this.add(ConteneurCartes_Tortue);
+        this.add(Vide4);
+        this.add(ConteneurCartes_Mur);
+
+        Vide1.setOpaque(false);
+        Vide2.setOpaque(false);
+        Vide3.setOpaque(false);
+        Vide4.setOpaque(false);
+        ConteneurCartes_Tortue.setOpaque(false);
+        ConteneurCartes_Mur.setOpaque(false);
+        this.setOpaque(false);
+
+    }
+
+    public Joueur getJoueur() {
+        return this.joueur;
+    }
+
+    public void iniCartePanel() {
+        for (int i = 0; i < joueur.getCartesMain().size(); i++) {
+            if (joueur.getCartesMain().get(i).getCouleur() == null) {
+                AffichageCarte a = new AffichageCarte(joueur.getCartesMain().get(i).getType(), i, joueur, this);
+                a.updateCarte(joueur.getCartesMain().get(i));
+                ConteneurCartes_Tortue.add(a);
+                listeAffichageCarte.add(a);
+            } else {
+                AffichageCarte a = new AffichageCarte(joueur.getCartesMain().get(i).getType(), joueur.getCartesMain().get(i).getCouleur(), joueur, this);
+                a.updateCarte(joueur.getCartesMain().get(i));
+                ConteneurCartes_Mur.add(a);
+                listeAffichageCarte.add(a);
+            }
+        }
+    }
+
+
+    public void updateCartePanel() {
+        joueur = feJeu.getPlateau().getTourJoueur();
+        System.out.println(joueur);
+        ConteneurCartes_Tortue.removeAll();
+        /** SI LES CARTES DANS LA MAIN SONT MOINS DE 10
+         */
         for (int i = 0; i < 10; i++) {
             if (i < joueur.getCartesMain().size()) {
+                AffichageCarte carte = listeAffichageCarte.get(i);
                 if (joueur.getCartesMain().get(i).getCouleur() == null) {
-                    ConteneurCartes.add(new AffichageCarte(joueur.getCartesMain().get(i).getType()));
+                    carte.updateCarte(joueur.getCartesMain().get(i));
+                    ConteneurCartes_Tortue.add(listeAffichageCarte.get(i));
                 } else {
-                    ConteneurCartes.add(new AffichageCarte(joueur.getCartesMain().get(i).getType(), joueur.getCartesMain().get(i).getCouleur()));
+                    carte.updateCarte(joueur.getCartesMain().get(i));
+                    ConteneurCartes_Mur.add(listeAffichageCarte.get(i));
                 }
             } else {
-                JPanel CartesVide = new JPanel();
-                CartesVide.setOpaque(false);
-                ConteneurCartes.add(CartesVide);
+                AffichageCarte a = new AffichageCarte(null, i, joueur, this);
+                ConteneurCartes_Tortue.add(a);
             }
-
-        }
-        this.add(texte);
-        this.add(ConteneurCartes);
-
-        texte.setOpaque(false);
-        ConteneurCartes.setOpaque(false);
-        this.setOpaque(false);
-    }
-
-    public static class AffichageCarte extends JPanel {
-        private String couleur;
-        private String type;
-
-        private AffichageCarte(String type) {
-            this.type = type;
-        }
-
-        private AffichageCarte(String type, String couleur) {
-            this.type = type;
-            this.couleur = couleur;
-        }
-
-        public void paintComponent(Graphics g) {
-            Image imgTuile;
-            if (couleur == null) {
-                try {
-                    imgTuile = ImageIO.read(new File("images\\Cartes\\carte_" + type.toLowerCase() + ".png"));
-                    g.drawImage(imgTuile, 0, 0, this.getWidth(), this.getHeight(), this);
-                } catch (IOException e) {
-                    System.out.println("Impossible de charger l'image :" + "\n" + "images\\Cartes\\carte_" + type.toLowerCase() + ".png");
-                }
-            } else {
-                try {
-                    imgTuile = ImageIO.read(new File("images\\Cartes\\carte_" + type.toLowerCase() + "_" + couleur.toLowerCase() + ".png"));
-                    g.drawImage(imgTuile, 0, 0, this.getWidth(), this.getHeight(), this);
-                } catch (IOException e) {
-                    System.out.println("Impossible de charger l'image :" + "\n" + "images\\Cartes\\carte_" + type.toLowerCase() + "_" + couleur.toLowerCase() + ".png");
-                }
-            }
-        }
-
-    }
-
-    public class Texte extends JPanel {
-        public void paintComponent(Graphics g) {
-            g.drawString(joueur.getCouleur(), 10, 20);
+            ConteneurCartes_Tortue.repaint();
+            ConteneurCartes_Tortue.revalidate();
         }
     }
 
+    public ArrayList<AffichageCarte> getListeAffichageCarte() {
+        return this.listeAffichageCarte;
+    }
+
+    public FenetreJeu getFeJeu() {
+        return this.feJeu;
+    }
 }
 

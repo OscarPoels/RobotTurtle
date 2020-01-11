@@ -1,6 +1,6 @@
 package Jeu;
 
-import Graphisme.FenetreJeuCont.Case;
+import Graphisme.FenetreJeuCont.AffichageCase;
 import Jeu.Tuiles.Joyau;
 import Jeu.Tuiles.Mur;
 import Jeu.Tuiles.Tortue;
@@ -12,11 +12,13 @@ import java.util.Collections;
 public class Plateau {
 
     //*************   VARIABLES  *************
-    protected Tuile[][] plateau = new Tuile[8][8];
-    private Case[][] ListeCase = new Case[8][8];
+    private Tuile[][] plateau = new Tuile[8][8];
+    private AffichageCase[][] listeAffichageCase = new AffichageCase[8][8];
     private ArrayList<Joueur> ListeJoueur = new ArrayList<>();
     private int nbJoueur;
     private Joueur TourJoueur;
+    private String[][] orientation = new String[8][8];
+    private int Tour = 0;
 
     //*************   CONSTRUCTEUR  *************
     public Plateau(int nbJoueur) {
@@ -28,30 +30,37 @@ public class Plateau {
         for (int i = 0; i < plateau.length; i++) {
             for (int j = 0; j < plateau[i].length; j++) {
                 plateau[i][j] = null;
+                orientation[i][j] = null;
             }
         }
         if (nbJoueur == 2) {
             plateau[0][1] = new Tortue(0, 1, "ROUGE", "S");
-            plateau[0][5] = new Tortue(0, 1, "BLEU", "S");
-            plateau[7][3] = new Joyau(0, 1, "VERT");
+            orientation[0][1] = "S";
+            plateau[0][5] = new Tortue(0, 5, "BLEU", "S");
+            orientation[0][5] = "S";
+            plateau[7][3] = new Joyau(7, 3, "VERT");
+            orientation[7][3] = "S";
             Joueur Rouge = new Joueur("ROUGE");
             Joueur Bleu = new Joueur("BLEU");
             ListeJoueur.add(Rouge);
             ListeJoueur.add(Bleu);
             this.nbJoueur = nbJoueur;
             for (int i = 0; i < plateau.length; i++) {
-                plateau[i][7] = new Mur(7, i, "PIERRE");
+                plateau[i][7] = new Mur(i, 7, "PIERRE");
             }
         }
         if (nbJoueur == 3) {
             plateau[0][0] = new Tortue(0, 0, "ROUGE", "S");
-            plateau[0][3] = new Tortue(0, 0, "BLEU", "S");
-            plateau[0][6] = new Tortue(0, 0, "ROSE", "S");
-            plateau[7][0] = new Joyau(0, 1, "ROSE");
-            plateau[7][3] = new Joyau(0, 1, "VERT");
-            plateau[7][6] = new Joyau(0, 1, "BLEU");
+            orientation[0][0] = "S";
+            plateau[0][3] = new Tortue(0, 3, "BLEU", "S");
+            orientation[0][3] = "S";
+            plateau[0][6] = new Tortue(0, 6, "ROSE", "S");
+            orientation[0][6] = "S";
+            plateau[7][0] = new Joyau(7, 0, "ROSE");
+            plateau[7][3] = new Joyau(7, 3, "VERT");
+            plateau[7][6] = new Joyau(7, 6, "BLEU");
             for (int i = 0; i < plateau.length; i++) {
-                plateau[i][7] = new Mur(7, i, "PIERRE");
+                plateau[i][7] = new Mur(i, 7, "PIERRE");
             }
             Joueur Rouge = new Joueur("ROUGE");
             Joueur Bleu = new Joueur("BLEU");
@@ -63,11 +72,15 @@ public class Plateau {
         }
         if (nbJoueur == 4) {
             plateau[0][0] = new Tortue(0, 0, "ROUGE", "S");
-            plateau[0][2] = new Tortue(0, 0, "BLEU", "S");
-            plateau[0][5] = new Tortue(0, 0, "ROSE", "S");
-            plateau[0][7] = new Tortue(0, 0, "VERT", "S");
-            plateau[7][1] = new Joyau(0, 1, "ROSE");
-            plateau[7][6] = new Joyau(0, 1, "BLEU");
+            orientation[0][0] = "S";
+            plateau[0][2] = new Tortue(0, 2, "BLEU", "S");
+            orientation[0][2] = "S";
+            plateau[0][5] = new Tortue(0, 5, "ROSE", "S");
+            orientation[0][5] = "S";
+            plateau[0][7] = new Tortue(0, 7, "VERT", "S");
+            orientation[0][7] = "S";
+            plateau[7][1] = new Joyau(7, 1, "ROSE");
+            plateau[7][6] = new Joyau(7, 6, "BLEU");
             Joueur Rouge = new Joueur("ROUGE");
             Joueur Bleu = new Joueur("BLEU");
             Joueur Rose = new Joueur("ROSE");
@@ -79,18 +92,22 @@ public class Plateau {
             this.nbJoueur = nbJoueur;
         }
 
-        for (int i = 0; i < plateau.length; i++) {
-            for (int j = 0; j < plateau[i].length; j++) {
-                Case c = new Case(i, j);
-                ListeCase[i][j] = c;
-                c.updateCase(plateau[i][j]);
-            }
-        }
+        updatePlateau();
         iniTourJoueur();
     }
 
-    public Case[][] getCases() {
-        return ListeCase;
+    public void updatePlateau() {
+        for (int i = 0; i < plateau.length; i++) {
+            for (int j = 0; j < plateau[i].length; j++) {
+                AffichageCase c = new AffichageCase(i, j);
+                listeAffichageCase[i][j] = c;
+                c.updateCase(plateau[i][j], orientation[i][j]);
+            }
+        }
+    }
+
+    public AffichageCase[][] getCases() {
+        return listeAffichageCase;
     }
 
     public int getNombreJoueur() {
@@ -110,12 +127,15 @@ public class Plateau {
         }
     }
 
-    public void updateTourJoueur(int Tour){
-        TourJoueur = ListeJoueur.get((Tour+1)%3);
+    public void updateTourJoueur() {
+        Tour++;
+        TourJoueur = ListeJoueur.get((Tour) % nbJoueur);
+        System.out.println(Tour);
     }
 
     public Joueur getTourJoueur() {
         return TourJoueur;
     }
+
 
 }

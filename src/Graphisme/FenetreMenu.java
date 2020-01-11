@@ -24,7 +24,7 @@ public class FenetreMenu extends JFrame {
         Background Back = new Background();
         //Parametre de base
         this.setTitle("Turtle Game");
-        this.setSize(775, 1002);
+        this.setSize(736, 520);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +54,7 @@ public class FenetreMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("2 Joueurs");
                 plateau = new Plateau(2);
-                FeJeu = new FenetreJeu(plateau);
+                FeJeu = new FenetreJeu(FenetreMenu.this);
                 dispose();
             }
         });
@@ -63,7 +63,7 @@ public class FenetreMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("3 Joueurs");
                 plateau = new Plateau(3);
-                FeJeu = new FenetreJeu(plateau);
+                FeJeu = new FenetreJeu(FenetreMenu.this);
                 dispose();
 
             }
@@ -73,7 +73,7 @@ public class FenetreMenu extends JFrame {
             public void actionPerformed(ActionEvent actionEvent) {
                 System.out.println("4 Joueurs");
                 plateau = new Plateau(4);
-                FeJeu = new FenetreJeu(plateau);
+                FeJeu = new FenetreJeu(FenetreMenu.this);
                 dispose();
             }
         });

@@ -2,7 +2,7 @@ package Jeu;
 
 import Graphisme.FenetreMenu;
 
-public class Main {
+public class Jeu {
     private static FenetreMenu fenetreMenu;
     public static void main(String[] args) {
         /*

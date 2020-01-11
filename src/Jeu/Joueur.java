@@ -1,9 +1,11 @@
 package Jeu;
 
+import Graphisme.FenetreJeuCont.EtatCarte;
 import Jeu.Cartes.Carte;
 import Jeu.Cartes.CarteMur;
 import Jeu.Tuiles.Mur;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -40,6 +42,8 @@ public class Joueur {
         return Programme;
     }
 
+    //*************   SETEUR  *************
+
 
     //*************   FONCTIONS  *************
 
@@ -64,15 +68,37 @@ public class Joueur {
             CartesMain.add(Deck.remove(0));
         }
         for (int i = 0; i < 3; i++) {
-            CartesMain.add(new CarteMur("PIERRE"));
+            CartesMain.add(new Carte("MUR", "PIERRE"));
         }
         for (int i = 0; i < 2; i++) {
-            CartesMain.add(new CarteMur("GLACE"));
+            CartesMain.add(new Carte("MUR", "GLACE"));
         }
     }
 
-    public void Programme(String Carte) {
+    public void addProgramme(String Carte) {
         Programme.add(Carte);
+    }
+
+    public void addCarteMain(Carte carte) {
+        CartesMain.add(carte);
+    }
+
+    public void removeCarteMain(Carte carte) {
+        CartesMain.remove(carte);
+    }
+
+    public void updateCarteMain() {
+        for (int i = CartesMain.size() - 1; i >= 0; i--) {
+            //System.out.println(CartesMain.get(i).getEtatCarte());
+            //System.out.println(CartesMain.get(i).getCouleur());
+            //System.out.println(CartesMain.get(i).getEtatCarte());
+            if (CartesMain.get(i).getEtatCarte().equals(EtatCarte.SELECTION)) {
+                CartesMain.remove(CartesMain.get(i));
+                /**TODO
+                 * Ajouter cette carte aux carte cachées
+                 */
+            }
+        }
     }
 
 }

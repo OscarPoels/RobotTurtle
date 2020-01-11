@@ -2,6 +2,7 @@ package Graphisme;
 
 
 import Graphisme.FenetreJeuCont.*;
+import Jeu.Cartes.Carte;
 import Jeu.Plateau;
 
 import javax.imageio.ImageIO;
@@ -11,20 +12,25 @@ import java.io.File;
 import java.io.IOException;
 
 public class FenetreJeu extends JFrame {
-    private static final Dimension TAILLE_CHOIXPANEL = new Dimension(220, 0);
-    private static final Dimension TAILLE_PROGRAMME = new Dimension(220, 0);
+    private static final Dimension TAILLE_CHOIXPANEL = new Dimension(250, 0);
+    private static final Dimension TAILLE_PROGRAMME = new Dimension(250, 0);
     private static final Dimension TAILLE_GRILLE = new Dimension(560, 560);
-    private static final Dimension CARTES_PANEL_TAILLE = new Dimension(1000, 200);
+    private static final Dimension CARTES_PANEL_TAILLE = new Dimension(1000, 160);
     public Plateau plateau;
+    public CartesPanel cartesPanel;
+    public ChoixPanel choixPanel;
+    public boolean a = false;
+    public FenetreMenu fenetreMenu;
 
-    public FenetreJeu(Plateau plateau) {
-        this.plateau = plateau;
+    public FenetreJeu(FenetreMenu fenetreMenu) {
+        this.fenetreMenu = fenetreMenu;
+        plateau = fenetreMenu.getPlateau();
 
+        choixPanel = new ChoixPanel(this);
         JPanel Conteneur = new JPanel();
         BackgroundJeu Background = new BackgroundJeu();
-        CartesPanel cartesPanel = new CartesPanel(plateau.getTourJoueur());
+        cartesPanel = new CartesPanel(this);
         ProgrammePanel programmePanel = new ProgrammePanel();
-        ChoixPanel choixPanel = new ChoixPanel();
         GrillePanel grillePanel = new GrillePanel(this);
 
 
@@ -39,7 +45,7 @@ public class FenetreJeu extends JFrame {
 
         this.setTitle("Turtle Game");
         //this.setBackground(Color.BLACK);
-        this.setSize(1200, 850);
+        this.setSize(1100, 850);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,11 +59,9 @@ public class FenetreJeu extends JFrame {
         this.setContentPane(Background);
         this.add(Conteneur);
         this.setVisible(true);
+
     }
 
-    public Plateau getPlateau() {
-        return this.plateau;
-    }
 
     public static class BackgroundJeu extends JPanel {
         public void paintComponent(Graphics g) {
@@ -71,4 +75,19 @@ public class FenetreJeu extends JFrame {
         }
     }
 
+    public CartesPanel getCartesPanel() {
+        return cartesPanel;
+    }
+
+    public Plateau getPlateau() {
+        return this.plateau;
+    }
+
+    public ChoixPanel getChoixPanel() {
+        return choixPanel;
+    }
+
+    public FenetreMenu getFenetreMenu() {
+        return fenetreMenu;
+    }
 }
